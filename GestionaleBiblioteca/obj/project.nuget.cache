@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/LdnmTBW4TI=",
+  "dgSpecHash": "k5tgwHy/S8U=",
   "success": true,
-  "projectFilePath": "C:\\Users\\aless\\source\\repos\\Inchino\\GestionaleBiblioteca\\GestionaleBiblioteca\\GestionaleBiblioteca.csproj",
+  "projectFilePath": "C:\\Users\\aless\\source\\repos\\Inchino\\U2-S5_10-03-2025\\GestionaleBiblioteca\\GestionaleBiblioteca.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aless\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\aless\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
