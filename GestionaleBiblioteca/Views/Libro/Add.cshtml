@@ -1,0 +1,30 @@
+﻿﻿@model AddLibroViewModel
+
+@{
+    ViewData["Title"] = "Add new product";
+}
+
+
+<form method="post" asp-controller="Product" asp-action="Add">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" type="text" class="form-control" asp-for="Name"/>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input id="author" type="text" class="form-control" asp-for="Author" />
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" asp-for="Description"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input id="price" type="number" class="form-control" asp-for="Price" />
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <input id="category" type="text" class="form-control" asp-for="Category" />
+    </div>
+    <button>Save</button>
+</form>
