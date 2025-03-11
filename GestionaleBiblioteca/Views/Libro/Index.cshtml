@@ -1,5 +1,17 @@
-﻿@model
+﻿@model LibriListaViewModel
 
 @{
 	ViewData["Title"] = "All books";
+}
+
+@if(Model.Libri != null && Model.Libri.Any())
+{
+	@foreach(var Libro in Model.Libri)
+	{
+		<div>@Libro.Name</div>
+	}
+}
+else
+{
+	<p class="text-danger">Libri non trovati</p>
 }

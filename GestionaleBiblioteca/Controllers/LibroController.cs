@@ -1,13 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using GestionaleBiblioteca.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GestionaleBiblioteca.Controllers
 {
     public class LibroController : Controller
     {
-        public IActionResult Index()
-        {
+        private readonly LibroService _productService;
 
-            return View();
+        public LibroController(LibroService productService)
+        {
+            _productService = productService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var LibriLista = await _productService.GetAllLibriAsync();
+
+            return View(LibriLista);
         }
     }
 }
