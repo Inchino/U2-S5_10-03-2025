@@ -1,11 +1,11 @@
-﻿﻿@model AddLibroViewModel
+﻿@model AddLibroViewModel
 
 @{
-    ViewData["Title"] = "Add new product";
+    ViewData["Title"] = "Add new book";
 }
 
 
-<form method="post" asp-controller="Product" asp-action="Add">
+<form method="post" asp-controller="Libro" asp-action="Add">
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input id="name" type="text" class="form-control" asp-for="Name"/>

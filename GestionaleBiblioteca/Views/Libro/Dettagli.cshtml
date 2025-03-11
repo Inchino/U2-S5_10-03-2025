@@ -1,7 +1,7 @@
-﻿﻿@model LibroDettagliViewModel
+﻿@model LibroDettagliViewModel
 
 @{
-    ViewData["Title"] = "Product details";
+    ViewData["Title"] = "Book details";
 }
 
 <table>
@@ -21,8 +21,8 @@
             <td>@Model.Price</td>
             <td>@Model.Category</td>
             <td>
-                <a class="btn btn-sm btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                <a class="btn btn-sm btn-warning" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a class="btn btn-sm btn-danger" asp-controller="Libro" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                <a class="btn btn-sm btn-warning" asp-controller="Libro" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
             </td>
         </tr>
     </tbody>
