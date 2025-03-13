@@ -344,3 +344,4 @@ C:\Users\aless\source\repos\Inchino\U2-S5_10-03-2025\GestionaleBiblioteca\obj\De
 C:\Users\aless\source\repos\Inchino\U2-S5_10-03-2025\GestionaleBiblioteca\obj\Debug\net8.0\GestionaleBiblioteca.pdb
 C:\Users\aless\source\repos\Inchino\U2-S5_10-03-2025\GestionaleBiblioteca\obj\Debug\net8.0\GestionaleBiblioteca.genruntimeconfig.cache
 C:\Users\aless\source\repos\Inchino\U2-S5_10-03-2025\GestionaleBiblioteca\obj\Debug\net8.0\ref\GestionaleBiblioteca.dll
+C:\Users\aless\source\repos\Inchino\U2-S5_10-03-2025\GestionaleBiblioteca\bin\Debug\net8.0\FluentEmail.Core.dll

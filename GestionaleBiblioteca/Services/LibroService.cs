@@ -70,6 +70,26 @@ namespace GestionaleBiblioteca.Services
             return libriLista;
         }
 
+        //public async Task<LibriListaViewModel> GetAllLibriAsync()
+        //{
+        //    var libriLista = new LibriListaViewModel();
+
+        //    try
+        //    {
+        //        libriLista.Libri = await _context.Libri
+        //            .Include(b => b.Prestiti)
+        //            .ToListAsync() ?? new List<Libro>();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Errore durante il recupero dei libri: {ex.Message}");
+
+        //        libriLista.Libri = new List<Libro>();
+        //    }
+
+        //    return libriLista;
+        //}
+
         public async Task<bool> AddLibroAsync(AddLibroViewModel addLibroViewModel)
         {
             var libro = new Libro

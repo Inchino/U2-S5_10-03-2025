@@ -12,6 +12,8 @@ builder.Services.AddDbContext<GestionaleBibliotecaDbContext>(options =>
 );
 
 builder.Services.AddScoped<LibroService>();
+builder.Services.AddScoped<PrestitoService>(); 
+
 
 var app = builder.Build();
 

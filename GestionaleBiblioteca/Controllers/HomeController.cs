@@ -27,12 +27,13 @@ public class HomeController : Controller
     [HttpGet("/")]
     public async Task<IActionResult> Index()
     {
-        var books = await _libroService.GetAllLibriAsync();
+        var booksViewModel = await _libroService.GetAllLibriAsync();
+        var books = booksViewModel.Libri;
 
         ViewBag.TotalBooks = books.Count;
         ViewBag.AvailableBooks = books.Count(b => b.Disponibile);
+        return View(books);
 
-        return View(books.ToList());
     }
 
     public IActionResult Privacy()
