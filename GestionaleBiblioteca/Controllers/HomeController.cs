@@ -27,7 +27,7 @@ public class HomeController : Controller
     [HttpGet("/")]
     public async Task<IActionResult> Index()
     {
-        var books = await _libroService.GetAllBooksAsync();
+        var books = await _libroService.GetAllLibriAsync();
 
         ViewBag.TotalBooks = books.Count;
         ViewBag.AvailableBooks = books.Count(b => b.Disponibile);

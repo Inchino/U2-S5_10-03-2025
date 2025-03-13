@@ -37,15 +37,18 @@ namespace GestionaleBiblioteca.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var libri = await _libroService.GetAllLibriAsync();
+            var libriViewModel = await _libroService.GetAllLibriAsync();
+            var libriDisponibili = libriViewModel.Libri
+                .Where(b => b.Disponibile)
+                .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
+                .ToList();
+
             var viewModel = new CreatePrestitoViewModel
             {
-                LibroId = Guid.Empty // Valore placeholder, da selezionare nel form
+                LibroId = Guid.Empty
             };
 
-            ViewBag.LibriDisponibili = libri.Where(b => b.Disponibile)
-                                            .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
-                                            .ToList();
+            ViewBag.LibriDisponibili = libriDisponibili;
             return View(viewModel);
         }
 
@@ -55,10 +58,13 @@ namespace GestionaleBiblioteca.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var libri = await _libroService.GetAllLibriAsync();
-                ViewBag.LibriDisponibili = libri.Where(b => b.Disponibile)
-                                                .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
-                                                .ToList();
+                var libriViewModel = await _libroService.GetAllLibriAsync();
+                var libriDisponibili = libriViewModel.Libri
+                    .Where(b => b.Disponibile)
+                    .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
+                    .ToList();
+
+                ViewBag.LibriDisponibili = libriDisponibili;
                 return View(prestitoViewModel);
             }
 
