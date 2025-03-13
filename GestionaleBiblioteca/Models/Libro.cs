@@ -16,7 +16,7 @@ namespace GestionaleBiblioteca.Models
         [StringLength(100, ErrorMessage = "L'autore non può superare i 100 caratteri")]
         public required string Autore { get; set; }
 
-        [Required(ErrorMessage = "Il genere è obbligatoria")]
+        [Required(ErrorMessage = "Il genere è obbligatorio")]
         [StringLength(50, ErrorMessage = "Il genere non può superare i 50 caratteri")]
         [Display(Name = "Genere")]
         public required string Genere { get; set; }

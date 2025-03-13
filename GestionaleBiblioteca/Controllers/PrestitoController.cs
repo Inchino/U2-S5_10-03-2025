@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using GestionaleBiblioteca.Services;
 using GestionaleBiblioteca.ViewModels;
 
-namespace Biblioteca.Controllers
+namespace GestionaleBiblioteca.Controllers
 {
     public class PrestitiController : Controller
     {
@@ -37,22 +37,28 @@ namespace Biblioteca.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var libri = await _libroService.GetAllBooksAsync();
-            var viewModel = new PrestitoViewModel
+            var libri = await _libroService.GetAllLibriAsync();
+            var viewModel = new CreatePrestitoViewModel
             {
-                LibriDisponibili = libri.Where(b => b.Disponibile)
-                                        .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
-                                        .ToList()
+                LibroId = Guid.Empty // Valore placeholder, da selezionare nel form
             };
+
+            ViewBag.LibriDisponibili = libri.Where(b => b.Disponibile)
+                                            .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
+                                            .ToList();
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PrestitoViewModel prestitoViewModel)
+        public async Task<IActionResult> Create(CreatePrestitoViewModel prestitoViewModel)
         {
             if (!ModelState.IsValid)
             {
+                var libri = await _libroService.GetAllLibriAsync();
+                ViewBag.LibriDisponibili = libri.Where(b => b.Disponibile)
+                                                .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
+                                                .ToList();
                 return View(prestitoViewModel);
             }
 
@@ -60,6 +66,7 @@ namespace Biblioteca.Controllers
             if (!result)
             {
                 TempData["Error"] = "Errore durante l'aggiunta del prestito.";
+                return RedirectToAction(nameof(Create));
             }
 
             return RedirectToAction(nameof(Index));
@@ -70,7 +77,7 @@ namespace Biblioteca.Controllers
         {
             try
             {
-                var result = await _prestitoService.ReturnBookAsync(id);
+                var result = await _prestitoService.ReturnBookAsync(new UpdatePrestitoViewModel { Id = id });
                 if (!result)
                 {
                     TempData["Error"] = "Errore durante la restituzione del libro.";

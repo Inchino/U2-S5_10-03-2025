@@ -6,20 +6,22 @@
 
 <table>
     <thead>
-        <th>Name</th>
-        <th>Author</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Actions</th>
+        <th>Titolo</th>
+        <th>Autore</th>
+        <th>Genere</th>
+        <th>Descrizione</th>
+        <th>Prezzo</th>
+        <th>Immagine Copertina</th>
+        <th>Azioni</th>
     </thead>
     <tbody>
         <tr>
-            <td>@Model.Name</td>
-            <td>@Model.Author</td>
-            <td>@Model.Description</td>
-            <td>@Model.Price</td>
-            <td>@Model.Category</td>
+            <td>@Model.Titolo</td>
+            <td>@Model.Autore</td>
+            <td>@Model.Genere</td>
+            <td>@Model.Descrizione</td>
+            <td>@Model.Prezzo</td>
+            <td>@Model.PercorsoImmagineCopertina</td>
             <td>
                 <a class="btn btn-sm btn-danger" asp-controller="Libro" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                 <a class="btn btn-sm btn-warning" asp-controller="Libro" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>

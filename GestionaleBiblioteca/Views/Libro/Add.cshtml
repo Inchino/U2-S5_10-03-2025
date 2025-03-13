@@ -7,24 +7,24 @@
 
 <form method="post" asp-controller="Libro" asp-action="Add">
     <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input id="name" type="text" class="form-control" asp-for="Name"/>
+        <label for="titolo" class="form-label">Titolo</label>
+        <input id="titolo" type="text" class="form-control" asp-for="Titolo"/>
     </div>
     <div class="mb-3">
-        <label for="author" class="form-label">Author</label>
-        <input id="author" type="text" class="form-control" asp-for="Author" />
+        <label for="autore" class="form-label">Autore</label>
+        <input id="autore" type="text" class="form-control" asp-for="Autore" />
     </div>
     <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea id="description" class="form-control" asp-for="Description"></textarea>
+        <label for="genere" class="form-label">Genere</label>
+        <input id="genere" type="text" class="form-control" asp-for="Genere" />
     </div>
     <div class="mb-3">
-        <label for="price" class="form-label">Price</label>
-        <input id="price" type="number" class="form-control" asp-for="Price" />
+        <label for="descrizione" class="form-label">Descrizione</label>
+        <textarea id="descrizione" class="form-control" asp-for="Descrizione"></textarea>
     </div>
     <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
-        <input id="category" type="text" class="form-control" asp-for="Category" />
+        <label for="prezzo" class="form-label">Price</label>
+        <input id="prezzo" type="number" class="form-control" asp-for="Prezzo" />
     </div>
     <button>Save</button>
 </form>

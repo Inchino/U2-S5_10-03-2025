@@ -29,6 +29,9 @@ namespace GestionaleBiblioteca.ViewModels
         [Display(Name = "Genere")]
         public required string Genere { get; set; }
 
+        [Display(Name = "Carica copertina")]
+        public IFormFile? ImmagineCopertina { get; set; }
+
         public string? PercorsoImmagineCopertina { get; set; }
     }
 }
