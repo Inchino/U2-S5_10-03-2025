@@ -5,14 +5,19 @@ namespace GestionaleBiblioteca.ViewModels
     public class LibroDettagliViewModel
     {
         public Guid? Id { get; set; }
-        public string? Name { get; set; }
+        public string? Titolo { get; set; }
 
-        public string? Author { get; set; }
+        public string? Autore { get; set; }
 
-        public string? Description { get; set; }
+        public string? Genere { get; set; }
 
-        public double Price { get; set; }
+        public string? Descrizione { get; set; }
 
-        public string? Category { get; set; }
+        public double? Prezzo { get; set; }
+
+        public required bool? Disponibile { get; set; }
+
+        public string? PercorsoImmagineCopertina { get; set; }
+
     }
 }

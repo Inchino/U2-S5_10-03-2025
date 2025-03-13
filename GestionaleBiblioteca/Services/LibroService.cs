@@ -58,7 +58,8 @@ namespace GestionaleBiblioteca.Services
 
             try
             {
-                libriLista.Libri = await _context.Libri.ToListAsync();
+                //libriLista.Libri = await _context.Libri.ToListAsync();
+                libriLista.Libri = await _context.Libri.Include(b => b.Prestiti).ToListAsync();
             }
             catch
             {
@@ -70,24 +71,27 @@ namespace GestionaleBiblioteca.Services
 
         public async Task<bool> AddLibroAsync(AddLibroViewModel addLibroViewModel)
         {
-            var libro = new Libro()
+            var libro = new Libro
             {
                 Id = Guid.NewGuid(),
-                Name = addLibroViewModel.Name,
-                Author = addLibroViewModel.Author,
-                Description = addLibroViewModel.Description,
-                Price = addLibroViewModel.Price,
-                Category = addLibroViewModel.Category
+                Titolo = addLibroViewModel.Titolo,
+                Autore = addLibroViewModel.Autore,
+                Genere = addLibroViewModel.Genere,
+                Descrizione = addLibroViewModel.Descrizione,
+                Prezzo = addLibroViewModel.Prezzo,
+                Disponibile = addLibroViewModel.Disponibile,
+                PercorsoImmagineCopertina = addLibroViewModel.PercorsoImmagineCopertina
             };
 
             _context.Libri.Add(libro);
-
             return await SaveAsync();
         }
 
+
         public async Task<Libro?> GetLibroByIdAsync(Guid id)
         {
-            var libro = await _context.Libri.FindAsync(id);
+            //var libro = await _context.Libri.FindAsync(id);
+            var libro = await _context.Libri.Include(l => l.Prestiti).FirstOrDefaultAsync(l => l.Id == id);
 
             if (libro == null)
             {
@@ -114,19 +118,34 @@ namespace GestionaleBiblioteca.Services
         public async Task<bool> UpdateLibroAsync(EditLibroViewModel editLibroViewModel)
         {
             var libro = await _context.Libri.FindAsync(editLibroViewModel.Id);
-
             if (libro == null)
             {
                 return false;
             }
 
-            libro.Name = editLibroViewModel.Name;
-            libro.Author = editLibroViewModel.Author;
-            libro.Description = editLibroViewModel.Description;
-            libro.Price = editLibroViewModel.Price;
-            libro.Category = editLibroViewModel.Category;
+            libro.Titolo = editLibroViewModel.Titolo;
+            libro.Autore = editLibroViewModel.Autore;
+            libro.Genere = editLibroViewModel.Genere;
+            libro.Descrizione = editLibroViewModel.Descrizione;
+            libro.Prezzo = editLibroViewModel.Prezzo;
+            libro.Disponibile = editLibroViewModel.Disponibile;
+            libro.PercorsoImmagineCopertina = editLibroViewModel.PercorsoImmagineCopertina;
 
             return await SaveAsync();
+        }
+
+        public async Task<List<Libro>> SearchLibriAsync(string parolachiave)
+        {
+            if (string.IsNullOrEmpty(parolachiave))
+            {
+                return await GetAllLibriAsync();
+            }
+
+            return await _context.Libri
+                .Where(b => b.Titolo.Contains(parolachiave) ||
+                            b.Autore.Contains(parolachiave) ||
+                            b.Genere.Contains(parolachiave))
+                .ToListAsync();
         }
     }
 }

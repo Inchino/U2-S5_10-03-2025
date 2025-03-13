@@ -53,12 +53,14 @@ namespace GestionaleBiblioteca.Controllers
 
             var libroDettagliViewModel = new LibroDettagliViewModel()
             {
-                Id =   libro.Id,
-                Name = libro.Name,
-                Author = libro.Author,
-                Description = libro.Description,
-                Price = libro.Price,
-                Category = libro.Category
+                Id = libro.Id,
+                Titolo = libro.Titolo,
+                Autore = libro.Autore,
+                Descrizione = libro.Descrizione,
+                Prezzo = libro.Prezzo,
+                Genere = libro.Genere,
+                Disponibile = libro.Disponibile,
+                PercorsoImmagineCopertina = libro.PercorsoImmagineCopertina
             };
 
             return View(libroDettagliViewModel);
@@ -89,11 +91,13 @@ namespace GestionaleBiblioteca.Controllers
             var editLibroViewModel = new EditLibroViewModel()
             {
                 Id = libro.Id,
-                Name = libro.Name,
-                Author = libro.Author,
-                Description = libro.Description,
-                Price = libro.Price,
-                Category = libro.Category
+                Titolo = libro.Titolo,
+                Autore = libro.Autore,
+                Descrizione = libro.Descrizione,
+                Prezzo = libro.Prezzo,
+                Genere = libro.Genere,
+                Disponibile = libro.Disponibile,
+                PercorsoImmagineCopertina = libro.PercorsoImmagineCopertina
             };
 
             return View(editLibroViewModel);

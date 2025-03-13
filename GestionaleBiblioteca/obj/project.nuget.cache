@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "k5tgwHy/S8U=",
+  "dgSpecHash": "cGXsBEKXoNw=",
   "success": true,
   "projectFilePath": "C:\\Users\\aless\\source\\repos\\Inchino\\U2-S5_10-03-2025\\GestionaleBiblioteca\\GestionaleBiblioteca.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aless\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\aless\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\aless\\.nuget\\packages\\fluentemail.core\\3.0.2\\fluentemail.core.3.0.2.nupkg.sha512",
     "C:\\Users\\aless\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\aless\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\aless\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",

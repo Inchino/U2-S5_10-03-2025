@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GestionaleBiblioteca.ViewModels;
+using GestionaleBiblioteca.Services;
 using GestionaleBiblioteca.Data;
 
 namespace GestionaleBiblioteca.Controllers;
@@ -10,15 +11,28 @@ public class HomeController : Controller
     
 
     private readonly ILogger<HomeController> _logger;
+    private readonly LibroService _libroService;
+    private readonly PrestitoService _prestitoService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(
+        ILogger<HomeController> logger,
+        LibroService libroService,
+        PrestitoService prestitoService)
     {
         _logger = logger;
+        _libroService = libroService;
+        _prestitoService = prestitoService;
     }
 
-    public IActionResult Index()
+    [HttpGet("/")]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var books = await _libroService.GetAllBooksAsync();
+
+        ViewBag.TotalBooks = books.Count;
+        ViewBag.AvailableBooks = books.Count(b => b.Disponibile);
+
+        return View(books.ToList());
     }
 
     public IActionResult Privacy()

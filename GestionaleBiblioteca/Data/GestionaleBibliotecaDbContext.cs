@@ -9,5 +9,7 @@ namespace GestionaleBiblioteca.Data
             options) : base(options) { }
 
         public DbSet<Libro> Libri { get; set; }
+
+        public DbSet<Prestito> Prestiti { get; set; }
     }
 }
