@@ -1,0 +1,27 @@
+﻿@model List<PrestitoViewModel>
+
+<h2>Prestiti Conclusi</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nome Utente</th>
+            <th>Email</th>
+            <th>Libro</th>
+            <th>Data Prestito</th>
+            <th>Data Restituzione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prestito in Model)
+        {
+            <tr>
+                <td>@prestito.NomeUtente</td>
+                <td>@prestito.EmailUtente</td>
+                <td>@prestito.TitoloLibro</td>
+                <td>@prestito.DataPrestito.ToShortDateString()</td>
+                <td>@prestito.DataRestituzioneEffettiva?.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Prestiti">Torna alla lista</a>

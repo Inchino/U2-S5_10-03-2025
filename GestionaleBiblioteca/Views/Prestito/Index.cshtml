@@ -1,0 +1,38 @@
+﻿@model List<PrestitoViewModel>
+
+@{
+    ViewData["Title"] = "Prestiti in corso";
+}
+
+<h2>Lista Prestiti</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nome Utente</th>
+            <th>Email</th>
+            <th>Libro</th>
+            <th>Data Prestito</th>
+            <th>Data Restituzione</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prestito in Model)
+        {
+            <tr>
+                <td>@prestito.NomeUtente</td>
+                <td>@prestito.EmailUtente</td>
+                <td>@prestito.TitoloLibro</td>
+                <td>@prestito.DataPrestito.ToShortDateString()</td>
+                <td>@prestito.DataRestituzione?.ToShortDateString()</td>
+                <td>
+                    <a href="/Prestiti/Edit/@prestito.Id">Modifica</a> |
+                    <form method="post" action="/Prestiti/Return/@prestito.Id" style="display:inline;">
+                        <button type="submit">Restituisci</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Prestiti/Create">Aggiungi Prestito</a>

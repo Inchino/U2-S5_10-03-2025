@@ -1,0 +1,22 @@
+﻿@model UpdatePrestitoViewModel
+
+@{
+    ViewData["Title"] = "Prestiti rientrati";
+}
+
+<h2>Modifica Prestito</h2>
+<form method="post" action="/Prestiti/Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <label>Nome Utente:</label>
+    <input type="text" asp-for="NomeUtente" required />
+
+    <label>Email Utente:</label>
+    <input type="email" asp-for="EmailUtente" required />
+
+    <label>Data Restituzione Effettiva:</label>
+    <input type="date" asp-for="DataRestituzioneEffettiva" />
+
+    <button type="submit">Salva</button>
+</form>
+<a href="/Prestiti">Torna alla lista</a>

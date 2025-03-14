@@ -4,27 +4,23 @@
     ViewData["Title"] = "Add new book";
 }
 
+<h2>Aggiungi Libro</h2>
+<form method="post" action="/Libri/Add">
+    <label>Titolo:</label>
+    <input type="text" asp-for="Titolo" required />
 
-<form method="post" asp-controller="Libro" asp-action="Add">
-    <div class="mb-3">
-        <label for="titolo" class="form-label">Titolo</label>
-        <input id="titolo" type="text" class="form-control" asp-for="Titolo"/>
-    </div>
-    <div class="mb-3">
-        <label for="autore" class="form-label">Autore</label>
-        <input id="autore" type="text" class="form-control" asp-for="Autore" />
-    </div>
-    <div class="mb-3">
-        <label for="genere" class="form-label">Genere</label>
-        <input id="genere" type="text" class="form-control" asp-for="Genere" />
-    </div>
-    <div class="mb-3">
-        <label for="descrizione" class="form-label">Descrizione</label>
-        <textarea id="descrizione" class="form-control" asp-for="Descrizione"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="prezzo" class="form-label">Price</label>
-        <input id="prezzo" type="number" class="form-control" asp-for="Prezzo" />
-    </div>
-    <button>Save</button>
+    <label>Autore:</label>
+    <input type="text" asp-for="Autore" required />
+
+    <label>Genere:</label>
+    <input type="text" asp-for="Genere" required />
+
+    <label>Descrizione:</label>
+    <textarea asp-for="Descrizione"></textarea>
+
+    <label>Prezzo:</label>
+    <input type="number" asp-for="Prezzo" step="0.01" required />
+
+    <button type="submit">Aggiungi</button>
 </form>
+<a href="/Libri">Torna alla lista</a>

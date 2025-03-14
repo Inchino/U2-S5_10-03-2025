@@ -4,14 +4,30 @@
 	ViewData["Title"] = "All books";
 }
 
-@if(Model.Libri != null && Model.Libri.Any())
-{
-	@foreach(var Libro in Model.Libri)
-	{
-		<div>@Libro.Titolo</div>
-	}
-}
-else
-{
-	<p class="text-danger">Libri non trovati</p>
-}
+<h2>Lista Libri</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Titolo</th>
+            <th>Autore</th>
+            <th>Genere</th>
+            <th>Disponibile</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in Model.Libri)
+        {
+            <tr>
+                <td>@libro.Titolo</td>
+                <td>@libro.Autore</td>
+                <td>@libro.Genere</td>
+                <td>@(libro.Disponibile ? "Sì" : "No")</td>
+                <td>
+                    <a href="/Libri/Edit/@libro.Id">Modifica</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Libri/Add">Aggiungi Libro</a>

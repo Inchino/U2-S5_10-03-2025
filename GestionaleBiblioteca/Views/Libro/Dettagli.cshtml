@@ -4,28 +4,11 @@
     ViewData["Title"] = "Book details";
 }
 
-<table>
-    <thead>
-        <th>Titolo</th>
-        <th>Autore</th>
-        <th>Genere</th>
-        <th>Descrizione</th>
-        <th>Prezzo</th>
-        <th>Immagine Copertina</th>
-        <th>Azioni</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Model.Titolo</td>
-            <td>@Model.Autore</td>
-            <td>@Model.Genere</td>
-            <td>@Model.Descrizione</td>
-            <td>@Model.Prezzo</td>
-            <td>@Model.PercorsoImmagineCopertina</td>
-            <td>
-                <a class="btn btn-sm btn-danger" asp-controller="Libro" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                <a class="btn btn-sm btn-warning" asp-controller="Libro" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<h2>Dettagli Libro</h2>
+<p><strong>Titolo:</strong> @Model.Titolo</p>
+<p><strong>Autore:</strong> @Model.Autore</p>
+<p><strong>Genere:</strong> @Model.Genere</p>
+<p><strong>Descrizione:</strong> @Model.Descrizione</p>
+<p><strong>Prezzo:</strong> @Model.Prezzo €</p>
+<p><strong>Disponibile:</strong> @Model.Disponibile</p>
+<a href="/Libri">Torna alla lista</a>
