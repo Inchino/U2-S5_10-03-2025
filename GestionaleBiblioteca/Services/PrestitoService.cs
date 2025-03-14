@@ -156,7 +156,7 @@ namespace GestionaleBiblioteca.Services
         //    return true;
         //}
 
-        public async Task<bool> AddLoanAsync(CreatePrestitoViewModel model)
+        public async Task<bool> AddLoanAsync(AddPrestitoViewModel model)
         {
             var libro = await _libroService.GetLibroByIdAsync(model.LibroId);
             if (libro == null || !libro.Disponibile)
@@ -275,6 +275,24 @@ namespace GestionaleBiblioteca.Services
         //        .Body($"Gentile {prestito.NomeUtente},\n\nLe ricordiamo che il prestito del libro '{prestito.Libro.Titolo}' scadrà il {prestito.DataRestituzione:dd/MM/yyyy}.\nLa preghiamo di procedere alla restituzione entro tale data.\n\nGrazie per la collaborazione.\n\nBiblioteca App")
         //        .SendAsync();
         //}
+
+        public async Task<bool> UpdateLoanAsync(UpdatePrestitoViewModel model)
+        {
+            var prestito = await _context.Prestiti.FindAsync(model.Id);
+            if (prestito == null)
+            {
+                throw new InvalidOperationException("Prestito non trovato");
+            }
+
+            prestito.NomeUtente = model.NomeUtente;
+            prestito.EmailUtente = model.EmailUtente;
+            prestito.DataRestituzioneEffettiva = model.DataRestituzioneEffettiva;
+            prestito.Note = model.Note;
+
+            _context.Prestiti.Update(prestito);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
 
         public async Task<bool> ReturnBookAsync(UpdatePrestitoViewModel model)
         {

@@ -2,7 +2,7 @@
 
 namespace GestionaleBiblioteca.ViewModels
 {
-    public class CreatePrestitoViewModel
+    public class AddPrestitoViewModel
     {
         //public string NomeUtente { get; set; } = string.Empty;
         //public string EmailUtente { get; set; } = string.Empty;

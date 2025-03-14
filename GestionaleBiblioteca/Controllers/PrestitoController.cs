@@ -5,12 +5,13 @@ using GestionaleBiblioteca.ViewModels;
 
 namespace GestionaleBiblioteca.Controllers
 {
-    public class PrestitiController : Controller
+    [Route("Prestito")]
+    public class PrestitoController : Controller
     {
         private readonly PrestitoService _prestitoService;
         private readonly LibroService _libroService;
 
-        public PrestitiController(
+        public PrestitoController(
             PrestitoService prestitoService,
             LibroService libroService)
         {
@@ -24,18 +25,19 @@ namespace GestionaleBiblioteca.Controllers
             return View(prestiti);
         }
 
-        [HttpGet("/prestito/{id:guid}")]
+        [HttpGet("Details/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var prestito = await _prestitoService.GetLoanByIdAsync(id);
             if (prestito == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
             return View(prestito);
         }
 
-        public async Task<IActionResult> Create()
+        [HttpGet("Add")]
+        public async Task<IActionResult> Add()
         {
             var libriViewModel = await _libroService.GetAllLibriAsync();
             var libriDisponibili = libriViewModel.Libri
@@ -43,7 +45,7 @@ namespace GestionaleBiblioteca.Controllers
                 .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Titolo })
                 .ToList();
 
-            var viewModel = new CreatePrestitoViewModel
+            var viewModel = new AddPrestitoViewModel
             {
                 LibroId = Guid.Empty
             };
@@ -52,9 +54,9 @@ namespace GestionaleBiblioteca.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreatePrestitoViewModel prestitoViewModel)
+        public async Task<IActionResult> Add(AddPrestitoViewModel prestitoViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -72,13 +74,53 @@ namespace GestionaleBiblioteca.Controllers
             if (!result)
             {
                 TempData["Error"] = "Errore durante l'aggiunta del prestito.";
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(Add));
             }
 
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost("/prestito/return/{id:guid}")]
+        [HttpGet("Edit/{id:guid}")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var prestito = await _prestitoService.GetLoanByIdAsync(id);
+            if (prestito == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var viewModel = new UpdatePrestitoViewModel
+            {
+                Id = prestito.Id.Value,
+                NomeUtente = prestito.NomeUtente,
+                EmailUtente = prestito.EmailUtente,
+                DataRestituzioneEffettiva = prestito.DataRestituzioneEffettiva,
+                Note = prestito.Note
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost("Edit/{id:guid}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UpdatePrestitoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var result = await _prestitoService.UpdateLoanAsync(model);
+            if (!result)
+            {
+                TempData["Error"] = "Errore durante la modifica del prestito.";
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost("Return/{id:guid}")]
         public async Task<IActionResult> Return(Guid id)
         {
             try

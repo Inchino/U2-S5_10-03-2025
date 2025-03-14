@@ -1,39 +1,47 @@
-﻿@model List<PrestitoViewModel>
+﻿@model GestionaleBiblioteca.ViewModels.AddPrestitoViewModel
 
 @{
-    ViewData["Title"] = "Aggiugni prestito";
-    var libri = ViewBag.BookList as SelectList;
+    ViewData["Title"] = "Aggiungi Prestito";
 }
 
-<h2>Lista Prestiti</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Nome Utente</th>
-            <th>Email</th>
-            <th>Libro</th>
-            <th>Data Prestito</th>
-            <th>Data Restituzione</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var prestito in Model)
-        {
-            <tr>
-                <td>@prestito.NomeUtente</td>
-                <td>@prestito.EmailUtente</td>
-                <td>@prestito.TitoloLibro</td>
-                <td>@prestito.DataPrestito.ToShortDateString()</td>
-                <td>@prestito.DataRestituzione?.ToShortDateString()</td>
-                <td>
-                    <a href="/Prestiti/Edit/@prestito.Id">Modifica</a> |
-                    <form method="post" action="/Prestiti/Return/@prestito.Id" style="display:inline;">
-                        <button type="submit">Restituisci</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<a href="/Prestiti/Create">Aggiungi Prestito</a>
+<h2 class="text-center">Aggiungi un nuovo prestito</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Add" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="NomeUtente" class="form-label">Nome Utente</label>
+                    <input asp-for="NomeUtente" class="form-control" placeholder="Inserisci il nome dell'utente" required>
+                    <span asp-validation-for="NomeUtente" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="EmailUtente" class="form-label">Email Utente</label>
+                    <input asp-for="EmailUtente" type="email" class="form-control" placeholder="Inserisci l'email" required>
+                    <span asp-validation-for="EmailUtente" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LibroId" class="form-label">Libro</label>
+                    <select asp-for="LibroId" class="form-select" asp-items="ViewBag.LibriDisponibili">
+                        <option value="">-- Seleziona un libro --</option>
+                    </select>
+                    <span asp-validation-for="LibroId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImmagineCopertinaFile" class="form-label">Immagine Copertina (opzionale)</label>
+                    <input asp-for="ImmagineCopertinaFile" type="file" class="form-control">
+                    <span asp-validation-for="ImmagineCopertinaFile" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Aggiungi Prestito</button>
+            </form>
+
+            <div class="mt-3 text-center">
+                <a asp-action="Index" class="btn btn-secondary">Torna alla lista prestiti</a>
+            </div>
+        </div>
+    </div>
+</div>

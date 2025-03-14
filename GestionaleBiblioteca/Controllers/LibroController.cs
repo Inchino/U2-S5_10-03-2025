@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestionaleBiblioteca.Controllers
 {
+    [Route("Libro")]
     public class LibroController : Controller
     {
         private readonly LibroService _libroService;
@@ -14,6 +15,7 @@ namespace GestionaleBiblioteca.Controllers
             _libroService = libroService;
         }
 
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var LibriLista = await _libroService.GetAllLibriAsync();
@@ -21,7 +23,14 @@ namespace GestionaleBiblioteca.Controllers
             return View(LibriLista);
         }
 
-        [HttpPost]
+        [HttpGet("Add")]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost("Add")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddLibroViewModel addLibroViewModel)
         {
             if(!ModelState.IsValid)
@@ -40,14 +49,14 @@ namespace GestionaleBiblioteca.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("libro/dettagli/{id:guid}")]
+        [HttpGet("Details/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var libro = await _libroService.GetLibroByIdAsync(id);
 
             if (libro == null)
             {
-                TempData["Error"] = "Errore mentre ottenevo informazino dal database";
+                TempData["Error"] = "Errore mentre ottenevo informazioni dal database";
                 return RedirectToAction("Index");
             }
 
@@ -78,6 +87,7 @@ namespace GestionaleBiblioteca.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Edit/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var libro = await _libroService.GetLibroByIdAsync(id);
@@ -103,7 +113,8 @@ namespace GestionaleBiblioteca.Controllers
             return View(editLibroViewModel);
         }
 
-        [HttpPost]
+        [HttpPost("Edit/{id:guid}")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditLibroViewModel editLibroViewModel)
         {
             var result = await _libroService.UpdateLibroAsync(editLibroViewModel);
