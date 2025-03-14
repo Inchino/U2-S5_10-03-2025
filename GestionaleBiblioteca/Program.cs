@@ -11,9 +11,20 @@ builder.Services.AddDbContext<GestionaleBibliotecaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-builder.Services.AddScoped<LibroService>();
-builder.Services.AddScoped<PrestitoService>(); 
+builder.Services.AddFluentEmail(builder.Configuration.GetSection("MailSettings").GetValue<string>("FromDefault"))
+    .AddRazorRenderer()
+    .AddMailKitSender(new FluentEmail.MailKitSmtp.SmtpClientOptions()
+    {
+        Server = builder.Configuration.GetSection("MailSettings").GetValue<string>("Server"),
+        User = builder.Configuration.GetSection("MailSettings").GetValue<string>("User"),
+        Password = builder.Configuration.GetSection("MailSettings").GetValue<string>("Password"),
+        Port = builder.Configuration.GetSection("MailSettings").GetValue<int>("Port"),
+        UseSsl = builder.Configuration.GetSection("MailSettings").GetValue<bool>("UseSsl"),
+        RequiresAuthentication = builder.Configuration.GetSection("MailSettings").GetValue<bool>("RequiresAuthentication")
+    });
 
+builder.Services.AddScoped<LibroService>();
+builder.Services.AddScoped<PrestitoService>();
 
 var app = builder.Build();
 

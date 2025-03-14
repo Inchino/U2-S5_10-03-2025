@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionaleBiblioteca")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69048e61e5daf09bb41594a9419a8107a540f743")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3cd7832680b141a279ee64bfd5afe2077a86f64")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionaleBiblioteca")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionaleBiblioteca")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
